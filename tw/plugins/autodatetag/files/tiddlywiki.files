@@ -1,0 +1,12 @@
+{
+	"tiddlers": [
+		{
+			"file": "autotag.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/jkmart/autodatetag/lib/autotag.js",
+				"module-type": "startup"
+			}
+		}
+    ]
+}

@@ -1,0 +1,5 @@
+title: $:/plugins/jkmart/autodatetag/readme
+
+Whenever you //create a new tiddler//, ~AutoDateTag can add date tags for you.
+
+Format is YYYY0MM0DD.

@@ -1,0 +1,29 @@
+{
+  "name": "auto-date-tag",
+  "version": "0.1.0",
+  "description": "TiddlyWiki5 Plugin to tag tiddlers automatically with date",
+  "main": "",
+  "dependencies": {
+    "tiddlywiki": "^5.1.23"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tiddlywiki tw --verbose --build || exit 1",
+    "start": "tiddlywiki tw --listen"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jkmart/auto-date-tag.git"
+  },
+  "keywords": [
+    "tiddlywiki",
+    "tw5"
+  ],
+  "author": "J. Kerry Martin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jkmart/auto-date-tag/issues"
+  },
+  "homepage": "https://github.com/jkmart/auto-date-tag#readme"
+}

@@ -1,0 +1,11 @@
+{
+	"title": "$:/plugins/jkmart/autodatetag",
+	"name": "AutoDateTag",
+	"description": "Tag tiddlers with date",
+	"author": "J. Kerry Martin",
+	"version": "0.1.0",
+	"core-version": ">=5.1.0",
+	"source": "http://www.github.com/jkmart/auto-date-tag",
+	"plugin-type": "plugin",
+	"list": "readme license"
+}
