@@ -36,11 +36,19 @@ module-type: startup
         // Check if tiddler is draft
         if (!/^Draft of|^\$:\//.test(title) && changes[title].modified) {
           let tiddler = $tw.wiki.getTiddler(title).fields;
-          let newTags = [now];
 
           cache[title] = true;
 
-          let tags = tiddler.tags ? newTags.concat(tiddler.tags) : newTags;
+          let tags;
+          let newTags = [now];
+
+          if (!tiddler.tags) {
+            tags = newTags;
+          } else if (tiddler.tags.indexOf(now) === -1) {
+            tags = newTags.concat(tiddler.tags);
+          } else {
+            tags = tiddler.tags;
+          }
           tiddlers.push(new $tw.Tiddler(tiddler, {tags: tags}));
         }
 
