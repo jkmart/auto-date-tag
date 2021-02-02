@@ -17,10 +17,15 @@ module-type: startup
 
   const cache = {};
 
+  const anyMatchRegex = (arr, regex) => {
+    return arr.some(e => regex.test(e));
+  };
+
   exports.startup = function () {
 
     const config = {};
-    config.dateFormat = 'YYYY0MM0DD';
+    config.dateFormat = 'YYYY 0MM 0DD';
+    config.dateRegex = /^[\d]{4}\s[\d]{2}\s[\d]{2}$/.compile();
 
     function dateTag(changes) {
       let now = $tw.utils.formatDateString(new Date, config.dateFormat);
@@ -34,23 +39,30 @@ module-type: startup
         }
 
         // Check if tiddler is draft
-        if (!/^Draft of|^\$:\//.test(title) && changes[title].modified) {
-          let tiddler = $tw.wiki.getTiddler(title).fields;
-
-          cache[title] = true;
-
-          let tags;
-          let newTags = [now];
-
-          if (!tiddler.tags) {
-            tags = newTags;
-          } else if (tiddler.tags.indexOf(now) === -1) {
-            tags = newTags.concat(tiddler.tags);
-          } else {
-            tags = tiddler.tags;
-          }
-          tiddlers.push(new $tw.Tiddler(tiddler, {tags: tags}));
+        if (/^Draft of|^\$:\//.test(title)) {
+          return;
         }
+        // Omit system tiddlers without modified field
+        if (!changes[title].modified) {
+          return;
+        }
+
+        // Add it to the cache
+
+        cache[title] = true;
+        let tiddler = $tw.wiki.getTiddler(title).fields;
+
+        let tags;
+        let newTags = [now];
+
+        if (!tiddler.tags) {
+          tags = newTags;
+        } else if (tiddler.tags.indexOf(now) === -1 || !anyMatchRegex(tiddler.tags, config.dateRegex)) {
+          tags = newTags.concat(tiddler.tags);
+        } else {
+          tags = tiddler.tags;
+        }
+        tiddlers.push(new $tw.Tiddler(tiddler, {tags: tags}));
 
       });
       $tw.wiki.addTiddlers(tiddlers);
